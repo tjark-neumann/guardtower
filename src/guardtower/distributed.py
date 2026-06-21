@@ -1,7 +1,7 @@
 """Checks for distributed training setups (DDP / FSDP).
 
 Single-process-friendly: detection is by wrapper class and process-group state,
-so these checks add value even when run on one rank during development.
+so these checks are useful even on a single rank during development.
 """
 
 from __future__ import annotations
