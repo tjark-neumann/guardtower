@@ -1,11 +1,11 @@
 # guardtower
 
-**Catch the silent fine-tuning bugs that waste GPU-hours — before you launch the run.**
+**Catch the silent fine-tuning bugs that waste GPU-hours, before you launch the run.**
 
 Most training bugs don't crash. The model runs, the loss goes down, and hours
 later your results are quietly wrong because the part you *meant* to train never
 did. `guardtower` runs **one instrumented training step on a single batch** and
-tells you, in plain language, exactly what's broken — then points each finding at
+tells you, in plain language, exactly what's broken, then points each finding at
 a documented [catalog of failure modes](CATALOG.md) with the fix and a reference.
 
 It's a pre-flight check for PyTorch training: a few seconds and no GPU to rule
@@ -42,11 +42,11 @@ The full, referenced list lives in **[CATALOG.md](CATALOG.md)** — 21 modes and
 
 A textbook silent LoRA mistake: the optimizer is built from the model, and the
 adapter is added *afterwards*. The optimizer captured the base weights (now
-frozen) and never sees the adapter tensors — the only thing meant to train.
+frozen) and never sees the adapter tensors, the only thing meant to train.
 Nothing crashes; the loss even drifts a little. Six GPU-hours later the adapter
 is exactly where it started.
 
-guardtower flags it on the first step — from two angles — while correctly
+guardtower flags it on the first step, from two angles, while correctly
 treating the zero-init adapter gradient as expected, not a bug:
 
 ![guardtower catching a silent LoRA optimizer bug on the first batch](assets/screenshot.png)
@@ -115,7 +115,7 @@ report.raise_if_errors()            # fail fast in CI / before launching
 ### Keep a cheap NaN watch on a real run
 
 Leave a guardtower on for the first steps so a blow-up is pinpointed to the exact
-module the instant it happens — instead of surfacing as a useless `loss=nan`
+module the instant it happens, instead of surfacing as a useless `loss=nan`
 several layers downstream:
 
 ```python
@@ -136,11 +136,9 @@ with guardtower.monitor(model, on_nonfinite="raise"):
 
 Each finding carries a `catalog_id` linking to its [catalog](CATALOG.md) entry.
 
-## The catalog is the point
+## The catalog
 
-The value isn't the loop over parameters — that's easy to regenerate. It's the
-curated, referenced list of *every silent way fine-tuning fails*, kept current.
-Hit a new one? Add an entry to `guardtower/catalog.py` and a check that emits its
+Hit a new fail? Add an entry to `guardtower/catalog.py` and a check that emits its
 id. `guardtower.catalog()` returns the list; `guardtower.catalog_markdown()`
 regenerates [CATALOG.md](CATALOG.md).
 
