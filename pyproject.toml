@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "guardtower"
+version = "0.3.0"
+description = "Catch silent fine-tuning bugs (LoRA/PEFT, DDP/FSDP, gradient & optimizer wiring) before you waste GPU-hours."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "Apache-2.0" }
+authors = [{ name = "You" }]
+keywords = ["pytorch", "machine-learning", "debugging", "training", "sanity-check", "mlops"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "License :: OSI Approved :: Apache Software License",
+]
+dependencies = ["torch>=1.12"]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+hf = ["transformers>=4.30"]
+
+[project.urls]
+Homepage = "https://github.com/tjark-neumann/guardtower"
+Issues = "https://github.com/tjark-neumann/guardtower/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/guardtower"]
