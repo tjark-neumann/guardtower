@@ -1,4 +1,4 @@
-"""guardtower — catch the silent bugs that waste GPU-hours, before you launch.
+"""guardtower: catch the silent bugs that waste GPU-hours before you launch.
 
 Quickstart
 ----------
@@ -51,8 +51,7 @@ except ImportError:
 
 
 def __getattr__(name):
-    # Lazily expose the Hugging Face callback without importing transformers
-    # at package import time.
+    # Expose the HF callback lazily so transformers isn't imported at package load.
     if name == "GuardtowerCallback":
         from .integrations.huggingface import GuardtowerCallback
         return GuardtowerCallback

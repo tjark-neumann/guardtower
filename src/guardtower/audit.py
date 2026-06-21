@@ -214,7 +214,7 @@ def _check_grad_connectivity(model: nn.Module, rep: Report, lora_aware: bool = F
         )
     if zero_grad:
         # LoRA's B matrix is zero-initialized, so A has no gradient on step 1.
-        # That's expected, not a bug — don't cry wolf about it.
+        # That's expected, not a bug, so report it as INFO rather than warn.
         if lora_aware:
             adapter_zero = [n for n in zero_grad if any(m in n for m in ADAPTER_MARKERS)]
             other_zero = [n for n in zero_grad if n not in adapter_zero]

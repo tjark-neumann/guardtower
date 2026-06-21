@@ -1,12 +1,8 @@
-"""The catalog of silent training-failure modes — the knowledge asset.
+"""Catalog of silent training-failure modes.
 
-Each check in guardtower traces to a :class:`FailureMode` here (by ``catalog_id``),
-so every finding carries *why* it matters, *how* to fix it, and a documented
-reference. The catalog is the durable value: looping over parameters is trivial;
-knowing the specific ways fine-tuning quietly fails — and keeping that list
-current — is not.
-
-Contributing a failure mode = add one entry here + a check that emits its id.
+Each check traces to a :class:`FailureMode` here (by ``catalog_id``), so every
+finding carries why it matters, how to fix it, and a reference. To add a failure
+mode, add one entry here and a check that emits its id.
 """
 
 from __future__ import annotations

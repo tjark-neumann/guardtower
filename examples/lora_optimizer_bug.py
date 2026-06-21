@@ -1,12 +1,12 @@
 """A real, silent LoRA bug guardtower catches in one step.
 
-The mistake (extremely common): you build the optimizer from the model, and
-*then* wrap it for LoRA. The optimizer captured the original weights — now
-frozen — and the adapter tensors it should be training didn't exist yet, so it
-never sees them. Nothing crashes, the loss even drifts a little, and six
-GPU-hours later your adapter is exactly at its initialisation.
+A common mistake: you build the optimizer from the model and then wrap it for
+LoRA. The optimizer captured the original weights (now frozen), and the adapter
+tensors it should be training didn't exist yet, so it never sees them. Nothing
+crashes, the loss even drifts a little, and six GPU-hours later the adapter is
+still at its initialization.
 
-This is the same shape as building the optimizer before ``get_peft_model(...)``.
+Same shape as building the optimizer before ``get_peft_model(...)``.
 
     python examples/lora_optimizer_bug.py
 """
@@ -52,12 +52,11 @@ def main():
     model = TinyModel()
 
     # --- the bug -----------------------------------------------------------
-    # Optimizer built here, from the model, the way most scripts do it...
+    # Optimizer built here, from the model, before the adapters exist.
     optimizer = torch.optim.AdamW(model.parameters(), lr=2e-4)
 
-    # ...and only *afterwards* do we add LoRA adapters. Brand-new tensors the
-    # optimizer above will never know about; the base it *did* capture is now
-    # frozen. The run trains nothing that matters.
+    # The LoRA adapters are added afterwards: new tensors the optimizer never
+    # sees, while the base weights it did capture are now frozen.
     model.q_proj = LoRALinear(model.q_proj)
     model.v_proj = LoRALinear(model.v_proj)
     for p in model.head.parameters():
@@ -75,7 +74,7 @@ def main():
     )
     print(report)
 
-    # In a real script this aborts the run before the GPU bill starts.
+    # In a real script this aborts the run before any GPU time is spent.
     try:
         report.raise_if_errors()
     except guardtower.GuardtowerError:

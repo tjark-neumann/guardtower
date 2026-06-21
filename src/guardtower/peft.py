@@ -109,7 +109,7 @@ def peft_checks(
             params=[n for n, _ in base_trainable],
         )
 
-    # 3) Headline trainable% (the at-a-glance signal) ------------------------
+    # 3) Overall trainable% ---------------------------------------------------
     total = sum(p.numel() for _, p in model.named_parameters())
     trainable = sum(p.numel() for _, p in model.named_parameters() if p.requires_grad)
     pct = (100.0 * trainable / total) if total else 0.0
@@ -157,7 +157,7 @@ def lora_summary(
     *,
     optimizer: torch.optim.Optimizer | None = None,
 ) -> Report:
-    """Training-free LoRA/PEFT sanity check. Great as a one-liner / README demo.
+    """Training-free LoRA/PEFT sanity check.
 
         print(guardtower.lora_summary(model, optimizer=opt))
     """

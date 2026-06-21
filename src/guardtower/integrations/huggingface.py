@@ -47,7 +47,7 @@ class GuardtowerCallback(TrainerCallback):
     ----------
     raise_on_error
         If True, abort training (raise ``GuardtowerError``) when blocking issues
-        are found — ideal so a misconfigured run never starts.
+        are found, so a misconfigured run never starts.
     checks
         Passed through to :func:`guardtower.audit`.
     verbose
