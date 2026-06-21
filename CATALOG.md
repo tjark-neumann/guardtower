@@ -1,6 +1,6 @@
 # Catalog of silent training-failure modes
 
-Every check in guardtower maps to one of these. Each entry says what the failure is, why it bites silently, how to fix it, and a reference. (21 modes and counting — contributions welcome.)
+Every check in guardtower maps to one of these. Each entry says what the failure is, why it bites silently, how to fix it, and a reference. (21 modes and counting. Contributions welcome.)
 
 ## LoRA / PEFT fine-tuning
 
