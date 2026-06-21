@@ -16,13 +16,13 @@ out the expensive, invisible mistakes.
 - **Instruments one real step** — forward, backward, and optimizer wiring — and
   reports what would silently go wrong over the next six hours.
 - **Knows how people fine-tune today.** Auto-detects **LoRA / PEFT / QLoRA** and
-  **multi-GPU (DDP / FSDP)** and runs the right checks — no config.
+  **multi-GPU (DDP / FSDP)** and runs the right checks, no config.
 - **Doesn't cry wolf.** It understands, for example, that LoRA's zero-initialized
   `B` matrix makes `A` show a zero gradient on step 1, so it reports that as
   *expected* instead of a false alarm.
 - **Maps every finding to a catalog entry** (`what it is · why it's silent · how
   to fix · reference`), so a result is also an explanation.
-- **Fails fast.** One call aborts a misconfigured run before training starts —
+- **Fails fast.** One call aborts a misconfigured run before training starts
   in a script, in CI, or as a Hugging Face `Trainer` callback.
 - **Pure inspection.** Core checks need only PyTorch; PEFT/transformers are
   never imported for LoRA detection, so it's safe on any model.
