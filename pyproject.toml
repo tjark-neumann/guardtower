@@ -9,7 +9,7 @@ description = "Catch silent fine-tuning bugs (LoRA/PEFT, DDP/FSDP, gradient & op
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "Apache-2.0" }
-authors = [{ name = "You" }]
+authors = [{ name = "Tjark Neumann" }]
 keywords = ["pytorch", "machine-learning", "debugging", "training", "sanity-check", "mlops"]
 classifiers = [
     "Programming Language :: Python :: 3",

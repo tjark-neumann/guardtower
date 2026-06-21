@@ -1,6 +1,6 @@
 """One-line pre-flight inside a Hugging Face Trainer.
 
-    pip install guardtower-ml[hf]
+    pip install guardtower[hf]
 """
 from guardtower.integrations.huggingface import GuardtowerCallback
 
