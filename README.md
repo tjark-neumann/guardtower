@@ -8,8 +8,8 @@ did. `guardtower` runs one instrumented training step on a single batch and tell
 you what's broken, then points each finding at a [catalog of failure modes](CATALOG.md)
 with the fix and a reference.
 
-A pre-flight check for PyTorch training: a few seconds, no GPU, and the
-expensive invisible mistakes are ruled out.
+A pre-flight check for PyTorch training that rules out the expensive, invisible
+mistakes in a few seconds, with no GPU required.
 
 ## What it does
 
