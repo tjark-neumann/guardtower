@@ -36,7 +36,7 @@ out the expensive, invisible mistakes.
 | **Core wiring** | a parameter that gets no gradient, a trainable param missing from the optimizer, a loss detached from the graph, a loss that doesn't depend on the input |
 | **Numerics** | NaN/Inf in forward **and** backward pinpointed to the module, dead ReLUs, exploding / vanishing gradient norms |
 
-The full, referenced list lives in **[CATALOG.md](CATALOG.md)** — 21 modes and counting.
+The full, referenced list lives in **[CATALOG.md](CATALOG.md)**: 21 modes and counting.
 
 ## See it catch a real bug
 
