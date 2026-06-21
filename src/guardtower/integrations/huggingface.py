@@ -1,7 +1,7 @@
 """Hugging Face ``Trainer`` integration.
 
-Drop a one-liner into the training people already run and guardtower audits the
-model on the first real batch, before the expensive part begins::
+Add the callback to a Trainer you already run and guardtower audits the model on
+the first real batch, before the expensive part begins::
 
     from guardtower.integrations.huggingface import GuardtowerCallback
 
