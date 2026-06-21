@@ -1,10 +1,10 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 [project]
 name = "guardtower"
-version = "0.3.0"
+dynamic = ["version"]
 description = "Catch silent fine-tuning bugs (LoRA/PEFT, DDP/FSDP, gradient & optimizer wiring) before you waste GPU-hours."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -26,6 +26,12 @@ hf = ["transformers>=4.30"]
 [project.urls]
 Homepage = "https://github.com/tjark-neumann/guardtower"
 Issues = "https://github.com/tjark-neumann/guardtower/issues"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/guardtower/_version.py"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/guardtower"]

@@ -39,7 +39,15 @@ __all__ = [
     "NonFiniteActivation",
 ]
 
-__version__ = "0.3.0"
+try:
+    from ._version import __version__
+except ImportError:
+    try:
+        from importlib.metadata import PackageNotFoundError, version
+
+        __version__ = version("guardtower")
+    except PackageNotFoundError:
+        __version__ = "0.0.0+unknown"
 
 
 def __getattr__(name):
